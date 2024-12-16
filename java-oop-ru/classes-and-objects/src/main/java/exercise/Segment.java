@@ -1,7 +1,4 @@
 package main.java.exercise;
-
-import main.java.exercise.Point;
-
 // BEGIN
 public class Segment {
 
