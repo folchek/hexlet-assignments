@@ -1,4 +1,4 @@
-package main.java.exercise;
+package exercise;
 // BEGIN
 public class Segment {
 

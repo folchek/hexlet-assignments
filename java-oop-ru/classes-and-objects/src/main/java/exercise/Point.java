@@ -1,4 +1,4 @@
-package main.java.exercise;
+package exercise;
 
 public class Point {
     private int x;
