@@ -29,25 +29,21 @@ class FileKVTest {
     }
 
     // BEGIN
-    @Test
-    void testFileKV() {
-        String filePath = "src/test/resources/file.json";
-        KeyValueStorage storage = new FileKV(filePath, Map.of("key1", "value1"));
+    void fileKVtest() {
+        KeyValueStorage storage = new FileKV(filepath.toString(), Map.of("key", "10"));
+        assertThat(storage.get("key2", "default")).isEqualTo("default");
+        assertThat(storage.get("key", "default")).isEqualTo("10");
 
-        // Проверяем начальные данные
-        assertThat(storage.get("key1", "default")).isEqualTo("value1");
-
-        // Добавляем данные
+        storage.set("key3", "value3");
         storage.set("key2", "value2");
+        storage.set("key", "value");
+
         assertThat(storage.get("key2", "default")).isEqualTo("value2");
+        assertThat(storage.get("key", "default")).isEqualTo("value");
 
-        // Удаляем данные
-        storage.unset("key1");
-        assertThat(storage.get("key1", "default")).isEqualTo("default");
-
-        // Проверяем сохранение всех данных
-        Map<String, String> expected = Map.of("key2", "value2");
-        assertThat(storage.toMap()).isEqualTo(expected);
+        storage.unset("key");
+        assertThat(storage.get("key", "def")).isEqualTo("def");
+        assertThat(storage.toMap()).isEqualTo(Map.of("key2", "value2", "key3", "value3"));
     }
     // END
 }
