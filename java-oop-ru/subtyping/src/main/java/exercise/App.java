@@ -7,16 +7,12 @@ import java.util.Set;
 
 // BEGIN
 public class App {
-    public static void swapKeyValue(Map<String, String> map) {
-        Map<String, String> tempMap = new HashMap<>();
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            tempMap.put(entry.getValue(), entry.getKey());
-        }
-        map.clear();
+    public static void swapKeyValue(KeyValueStorage db) {
+        Map<String, String> originalMap = db.toMap();;
+        Set<Map.Entry<String, String>> mapEntries = originalMap.entrySet();
 
-        for (Entry<String, String> entry : tempMap.entrySet()) {
-            map.put(String.valueOf(entry.getKey()), entry.getValue());
-        }
+        mapEntries.forEach(entry -> db.unset(entry.getKey()));
+        mapEntries.forEach(entry -> db.set(entry.getValue(), entry.getKey()));
     }
 }
 // END
