@@ -14,8 +14,11 @@ public class Circle {
         return this.radius;
     }
 
-    public double getSquare() {
-        return this.radius * this.radius * Math.PI;
+    public double getSquare() throws NegativeRadiusException {
+        if (radius < 0) {
+            throw new NegativeRadiusException("Радиус не может быть отрицательным");
+        }
+        return Math.PI * radius * radius; // или Math.PI * Math.pow(radius, 2)
     }
 
 }
